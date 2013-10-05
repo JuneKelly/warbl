@@ -3,19 +3,45 @@
 {% endblock %}
 {% block content %}
 <h2>User details for {{user.id}}</h2>
-		<form action="{{servlet-context}}/update-profile" method="POST">
-			<label for="id">first name</label>			
-			<p>
-				<input id="first-name" name="first-name" tabindex="1" type="text" value={{user.f_name}}></input>
-			</p>
-			<label for="id">last name</label>
-			<p>
-				<input id="last-name" name="last-name" tabindex="1" type="text" value={{user.l_name}}></input>
-			</p>
-			<label for="id">email</label>
-			<p>
-				<input id="email" name="email" tabindex="1" type="text" value={{user.email}}></input>
-			</p>			
-			<input class="btn" tabindex="4" type="submit" value="update profile">
-		</form>
+  <div class="col-md-4">
+    <form role="form" action="{{servlet-context}}/update-profile" method="POST">
+      <div class="form-group">
+        <label for="id">First Name</label>
+        <p>
+          <input id="first-name"
+                 name="first-name"
+                 tabindex="1"
+                 type="text"
+                 value={{user.f_name}}
+                 class="form-control">
+          </input>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label for="id">Last Name</label>
+        <p>
+          <input id="last-name" name="last-name"
+                 tabindex="1" type="text" value={{user.l_name}}
+                 class="form-control">
+          </input>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label for="id">Email</label>
+        <p>
+          <input id="email"
+                 name="email"
+                 tabindex="1"
+                 type="text"
+                 value={{user.email}}
+                 class="form-control">
+          </input>
+        </p>
+      </div>
+
+      <input class="btn" tabindex="4" type="submit" value="update profile">
+    </form>
+  </div>
 {% endblock %}
