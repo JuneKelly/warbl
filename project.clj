@@ -17,7 +17,12 @@
                        com.sun.jdmk/jmxtools
                        com.sun.jmx/jmxri]]
    [environ "0.4.0"]
-   [com.novemberain/monger "1.5.0"]]
+   [com.novemberain/monger "1.5.0"]
+   [clj-webdriver "0.6.0"]
+   ;; bodge, see https://github.com/Kodowa/Light-Table-Playground/issues/794
+   [org.clojure/core.cache "0.6.3"]
+   [org.clojure/core.memoize "0.5.6"
+    :exclusions [org.clojure/core.cache]]]
 
   :ring {
     :handler warbl.handler/war-handler,
@@ -37,11 +42,18 @@
       :env {:db-url "mongodb://localhost/warbl_local"}}
 
     :test {
-      :env {:db-url "mongodb://localhost/warbl_test"}}}
+      :env {:db-url "mongodb://localhost/warbl_test"
+            :site-url "http://localhost:3001"}
+      :dependencies [[ring-mock "0.1.5"]
+                     [ring/ring-devel "1.2.0"]
+                     [speclj "2.5.0"]]
+      :ring {:port 3001}}}
 
   :url "http://example.com/FIXME"
   :plugins [[lein-ring "0.8.7"]
-            [lein-environ "0.4.0"]]
+            [lein-environ "0.4.0"]
+            [speclj "2.5.0"]]
+  :test-paths ["spec"]
   :description
   "FIXME: write description"
   :min-lein-version "2.0.0")

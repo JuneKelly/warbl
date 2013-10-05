@@ -2,13 +2,16 @@
 {% block content %}
  <div class="jumbotron">
     <h1>Welcome to warbl</h1>
-    <p>Time to start building your site!</p>
-    <p><a class="btn btn-primary btn-large" href="http://luminusweb.net">Learn more &raquo;</a></p>
+    <p>We're not even sure what this is supposed to do yet...</p>
+    <p><a class="btn btn-primary btn-large"
+        href="{{servlet-context}}/register">
+        Register &raquo;
+      </a>
+    </p>
  </div>
 
  <div class="row">
     <div class="col-md-8">
-    {{content|safe}}
     </div>
  </div>
 {% endblock %}
