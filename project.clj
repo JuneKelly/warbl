@@ -19,7 +19,8 @@
    [environ "0.4.0"]
    [com.novemberain/monger "1.5.0"]
    [clj-webdriver "0.6.0"]
-   ;; bodge, see https://github.com/Kodowa/Light-Table-Playground/issues/794
+   ;; bodge,
+   ;; see https://github.com/Kodowa/Light-Table-Playground/issues/794
    [org.clojure/core.cache "0.6.3"]
    [org.clojure/core.memoize "0.5.6"
     :exclusions [org.clojure/core.cache]]]
@@ -39,10 +40,12 @@
     :dev {
       :dependencies [[ring-mock "0.1.5"]
                      [ring/ring-devel "1.2.0"]]
-      :env {:db-url "mongodb://localhost/warbl_local"}}
+      :env {:db-name "warbl_local"
+            :db-url "mongodb://localhost/warbl_local"}}
 
     :test {
-      :env {:db-url "mongodb://localhost/warbl_test"
+      :env {:db-name "warbl_test"
+            :db-url "mongodb://localhost/warbl_test"
             :site-url "http://localhost:3001"}
       :dependencies [[ring-mock "0.1.5"]
                      [ring/ring-devel "1.2.0"]
