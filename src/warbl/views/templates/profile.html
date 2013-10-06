@@ -2,8 +2,9 @@
 {% block menu %}
 {% endblock %}
 {% block content %}
-<h2>User details for {{user.id}}</h2>
   <div class="col-md-4">
+    <h2>User details for: {{user._id}}</h2>
+    <br />
     <form role="form" action="{{servlet-context}}/update-profile" method="POST">
       <div class="form-group">
         <label for="id">First Name</label>
@@ -41,7 +42,8 @@
         </p>
       </div>
 
-      <input class="btn" tabindex="4" type="submit" value="update profile">
+      <input class="btn btn-success" tabindex="4" type="submit" value="Update Profile">
+      <a class="btn btn-default" href="/">Cancel</a>
     </form>
   </div>
 {% endblock %}
