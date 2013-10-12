@@ -1,11 +1,12 @@
 (ns warbl.handler
   (:require [compojure.core :refer [defroutes]]
-            [warbl.routes.home :refer [home-routes]]
             [noir.util.middleware :as middleware]
             [compojure.route :as route]
             [taoensso.timbre :as timbre]
             [com.postspectacular.rotor :as rotor]
+            [warbl.routes.home :refer [home-routes]]
             [warbl.routes.auth :refer [auth-routes]]
+            [warbl.routes.dashboard :refer [dashboard-routes]]
             [warbl.models.schema :as schema]))
 
 
@@ -44,7 +45,10 @@
 
 (def app
  (middleware/app-handler
-   [auth-routes home-routes app-routes]
+   [auth-routes
+    dashboard-routes
+    home-routes
+    app-routes]
    :middleware
    []
    :access-rules

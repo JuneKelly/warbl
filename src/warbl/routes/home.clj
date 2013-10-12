@@ -1,12 +1,16 @@
 (ns warbl.routes.home
   (:use compojure.core)
   (:require [warbl.views.layout :as layout]
-            [warbl.util :as util]))
+            [warbl.util :as util]
+            [warbl.helpers.auth :as auth]
+            [noir.response :as resp]))
 
 
 (defn home-page []
-  (layout/render
-    "home.html" {:content (util/md->html "/md/docs.md")}))
+  (if (auth/logged-in?)
+    (resp/redirect "/dashboard")
+    (layout/render
+      "home.html" {:content (util/md->html "/md/docs.md")})))
 
 
 (defn about-page []

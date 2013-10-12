@@ -6,7 +6,7 @@
             [noir.validation :as vali]
             [noir.util.crypt :as crypt]
             [warbl.models.db :as db]
-            [warbl.helpers.auth :as helper]))
+            [warbl.helpers.auth :as auth]))
 
 
 (defn valid? [id pass pass1]
@@ -33,7 +33,7 @@
     (try
       (do
         (db/create-user id (crypt/encrypt pass))
-        (helper/log-in id)
+        (auth/log-in id)
         (resp/redirect "/"))
       (catch Exception ex
         (vali/rule false [:id (.getMessage ex)])
@@ -42,29 +42,29 @@
 
 
 (defn profile []
-  (if (helper/logged-in?)
+  (if (auth/logged-in?)
     (layout/render
       "profile.html"
-      {:user (db/get-user (helper/current-user))})
+      {:user (db/get-user (auth/current-user))})
     (resp/redirect "/")))
 
 
 (defn update-profile [{:keys [first-name last-name email]}]
-  (if (helper/logged-in?)
+  (if (auth/logged-in?)
     (do
-      (db/update-user (helper/current-user) first-name last-name email)
+      (db/update-user (auth/current-user) first-name last-name email)
       (resp/redirect "/profile"))))
 
 
 (defn handle-login [id pass]
   (let [user (db/get-user id)]
     (if (and user (crypt/compare pass (:password user)))
-      (helper/log-in id))
-    (resp/redirect "/")))
+      (auth/log-in id))
+    (resp/redirect "/dashboard")))
 
 
 (defn logout []
-  (helper/log-out)
+  (auth/log-out)
   (resp/redirect "/"))
 
 

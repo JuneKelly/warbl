@@ -41,7 +41,7 @@
       :dependencies [[ring-mock "0.1.5"]
                      [ring/ring-devel "1.2.0"]
                      [speclj "2.5.0"]]
-      :env {:db-name "warbl_local"
+      :env {:db-name "warbl_dev"
             :db-url "mongodb://localhost/warbl_local"}}
 
     :test {
