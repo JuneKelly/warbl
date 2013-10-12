@@ -57,10 +57,14 @@
 
 
 (defn handle-login [id pass]
-  (let [user (db/get-user id)]
+  (if-let [user (db/get-user id)]
     (if (and user (crypt/compare pass (:password user)))
-      (auth/log-in id))
-    (resp/redirect "/dashboard")))
+      (do
+        (auth/log-in id)
+        (resp/redirect "/dashboard"))
+      (do
+        (resp/redirect "/")))
+    (resp/redirect "/")))
 
 
 (defn logout []

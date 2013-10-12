@@ -24,13 +24,15 @@
             :email email}}))
 
 
-(defn get-user [id]
-  (mc/find-map-by-id "users" id))
-
-
 (defn user-exists? [id]
   (not (nil?
          (mc/find-map-by-id "users" id))))
+
+
+(defn get-user [id]
+  (if (user-exists? id)
+    (mc/find-map-by-id "users" id)
+    nil))
 
 
 (defn get-all-users []
