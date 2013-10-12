@@ -64,8 +64,11 @@
         (session/flash-put! :msg "Logged in!!!")
         (resp/redirect "/dashboard"))
       (do
+        (session/flash-put! :msg "Incorrect credentials")
         (resp/redirect "/")))
-    (resp/redirect "/")))
+    (do
+      (session/flash-put! :msg "Incorrect credentials")
+      (resp/redirect "/"))))
 
 
 (defn logout []
