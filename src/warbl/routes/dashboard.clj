@@ -1,6 +1,7 @@
 (ns warbl.routes.dashboard
   (:use compojure.core)
   (:require [noir.response :as resp]
+            [noir.session :as session]
             [warbl.views.layout :as layout]
             [warbl.util :as util]
             [warbl.helpers.auth :as auth]
@@ -10,7 +11,8 @@
 (defn dashboard []
   (if auth/logged-in?
     (layout/render "dashboard.html"
-                   {:user (db/get-user (auth/current-user))})
+                   {:user (db/get-user (auth/current-user))
+                    :flash-message (session/flash-get :msg)})
     (resp/redirect "/")))
 
 

@@ -61,6 +61,7 @@
     (if (and user (crypt/compare pass (:password user)))
       (do
         (auth/log-in id)
+        (session/flash-put! :msg "Logged in!!!")
         (resp/redirect "/dashboard"))
       (do
         (resp/redirect "/")))
