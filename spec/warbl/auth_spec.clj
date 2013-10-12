@@ -36,7 +36,8 @@
       (t/quick-fill-submit {"#id" "userone"}
                            {"#pass" "password"}
                            {"input.btn[value=Login]" t/click})
-      (should-contain "userone" (t/text {:tag :body}))))
+      (should-contain "userone" (t/text {:tag :body}))
+      (should-contain "Dashboard" (t/text {:tag :body}))))
 
 
 (describe "attempt login as invalid user"
