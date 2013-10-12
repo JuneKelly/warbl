@@ -30,9 +30,7 @@
 
 
 (defn get-user [id]
-  (if (user-exists? id)
-    (mc/find-map-by-id "users" id)
-    nil))
+  (mc/find-map-by-id "users" id))
 
 
 (defn get-all-users []
