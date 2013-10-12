@@ -42,7 +42,7 @@
                      [ring/ring-devel "1.2.0"]
                      [speclj "2.5.0"]]
       :env {:db-name "warbl_dev"
-            :db-url "mongodb://localhost/warbl_local"}}
+            :db-url "mongodb://localhost/warbl_dev"}}
 
     :test {
       :env {:db-name "warbl_test"

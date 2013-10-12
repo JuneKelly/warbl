@@ -28,5 +28,10 @@
   (mc/find-map-by-id "users" id))
 
 
+(defn user-exists? [id]
+  (not (nil?
+         (mc/find-map-by-id "users" id))))
+
+
 (defn get-all-users []
   (mc/find-maps "users" {}))
