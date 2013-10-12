@@ -22,7 +22,8 @@
           :servlet-context
           (:context request)
           :user-id
-          (session/get :user-id))
+          (session/get :user-id)
+          :flash-message (session/flash-get :msg))
         (parser/render-file (str template-path template))
         response)
       "text/html; charset=utf-8")))

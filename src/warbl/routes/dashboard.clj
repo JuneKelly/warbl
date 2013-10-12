@@ -11,8 +11,7 @@
 (defn dashboard []
   (if auth/logged-in?
     (layout/render "dashboard.html"
-                   {:user (db/get-user (auth/current-user))
-                    :flash-message (session/flash-get :msg)})
+                   {:user (db/get-user (auth/current-user))})
     (resp/redirect "/")))
 
 

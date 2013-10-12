@@ -11,8 +11,7 @@
   (if (auth/logged-in?)
     (resp/redirect "/dashboard")
     (layout/render
-      "home.html" {:content (util/md->html "/md/docs.md")
-                   :flash-message (session/flash-get :msg)})))
+      "home.html" {:content (util/md->html "/md/docs.md")})))
 
 
 (defn about-page []
