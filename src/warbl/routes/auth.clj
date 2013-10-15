@@ -61,13 +61,13 @@
     (if (and user (crypt/compare pass (:password user)))
       (do
         (auth/log-in id)
-        (session/flash-put! :msg "Logged in!!!")
+        (session/flash-put! :flash-success "Logged in!!!")
         (resp/redirect "/dashboard"))
       (do
-        (session/flash-put! :msg "Incorrect credentials")
+        (session/flash-put! :flash-warning "Incorrect credentials")
         (resp/redirect "/")))
     (do
-      (session/flash-put! :msg "Incorrect credentials")
+      (session/flash-put! :flash-warning "Incorrect credentials")
       (resp/redirect "/"))))
 
 

@@ -23,7 +23,10 @@
           (:context request)
           :user-id
           (session/get :user-id)
-          :flash-message (session/flash-get :msg))
+          :flash-success (session/flash-get :flash-success)
+          :flash-info    (session/flash-get :flash-info)
+          :flash-warning (session/flash-get :flash-warning)
+          :flash-danger  (session/flash-get :flash-danger))
         (parser/render-file (str template-path template))
         response)
       "text/html; charset=utf-8")))

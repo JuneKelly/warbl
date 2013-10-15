@@ -1,5 +1,20 @@
-{% if flash-message %}
+{% if flash-info %}
   <div class="alert alert-info">
-    {{flash-message}}
+    {{flash-info}}
+  </div>
+{% endif %}
+{% if flash-success %}
+  <div class="alert alert-success">
+    {{flash-success}}
+  </div>
+{% endif %}
+{% if flash-warning %}
+  <div class="alert alert-warning">
+    {{flash-warning}}
+  </div>
+{% endif %}
+{% if flash-danger %}
+  <div class="alert alert-danger">
+    {{flash-danger}}
   </div>
 {% endif %}
