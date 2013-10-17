@@ -4,10 +4,7 @@
         [ring.mock.request]
         [warbl.handler])
   (:require [clj-webdriver.taxi :as t]
-            [warbl.env :refer [config]]))
-
-
-(def site-root (config :site-url))
+            [warbl.test-util :as util]))
 
 
 (describe "homepage, with guest user"
@@ -15,7 +12,7 @@
   (before-all (t/set-driver! {:browser :firefox}))
   (after-all (t/quit))
 
-  (before (t/to site-root))
+  (before (t/to util/site-root))
 
   (it "should have warbl name in brand link"
       (should-contain "warbl" (t/text {:tag :a, :class "navbar-brand"})))

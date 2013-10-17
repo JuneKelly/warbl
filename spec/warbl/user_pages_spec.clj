@@ -4,11 +4,7 @@
         [ring.mock.request]
         [warbl.handler])
   (:require [clj-webdriver.taxi :as t]
-            [warbl.env :refer [config]]
             [warbl.test-util :as util]))
-
-
-(def site-root (config :site-url))
 
 
 (describe "user profile"
@@ -16,7 +12,7 @@
     (t/set-driver! {:browser :firefox})
     (util/drop-database!)
     (util/populate-users)
-    (do (t/to site-root)
+    (do (t/to util/site-root)
         (t/quick-fill-submit
           {"#id" "userone"}
           {"#pass" "password"}
@@ -25,5 +21,5 @@
 
 
   (it "should have basic labels"
-      (t/to (str site-root "/profile"))
+      (t/to (str util/site-root "/profile"))
       (should-contain "User details for:" (t/text {:tag :body}))))

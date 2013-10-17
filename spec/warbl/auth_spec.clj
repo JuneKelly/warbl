@@ -8,9 +8,6 @@
             [warbl.test-util :as util]))
 
 
-(def site-root (config :site-url))
-
-
 (describe "login form on homepage"
 
   (before-all (t/set-driver! {:browser :firefox}))
@@ -32,13 +29,10 @@
           (util/populate-users))
 
   (it "should allow a user to log in"
-      (t/to site-root)
-      (t/quick-fill-submit {"#id" "userone"}
-                           {"#pass" "password"}
-                           {"input.btn[value=Login]" t/click})
+      (util/login-userone)
       (should-contain "userone" (t/text {:tag :body}))
       (should-contain "Dashboard" (t/text {:tag :body}))
-      (should-contain "Logged in!!!" (t/text ".alert"))))
+      (should-contain "Logged in!!!" (t/text "div.alert"))))
 
 
 (describe "attempt login as invalid user"
@@ -47,10 +41,11 @@
   (after-all (t/quit))
 
   (it "should not log in"
-      (t/to site-root)
+      (t/to util/site-root)
       (t/quick-fill-submit {"#id" "not-a-user"}
                            {"#pass" "whatever"}
                            {"input.btn[value=Login]" t/click})
       (should-not-contain "not-a-user" (t/text {:tag :body}))
       (should-not-contain "Users" (t/text {:tag :body}))
-      (should-not-contain "Feed" (t/text {:tag :body}))))
+      (should-not-contain "Feed" (t/text {:tag :body}))
+      (should-contain "Incorrect credentials" (t/text "div.alert"))))
