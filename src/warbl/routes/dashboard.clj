@@ -9,10 +9,13 @@
 
 
 (defn dashboard []
-  (if auth/logged-in?
+  (if (auth/logged-in?)
     (layout/render "dashboard.html"
                    {:user (db/get-user (auth/current-user))})
-    (resp/redirect "/")))
+    (do
+      (session/flash-put!
+        :flash-info "You must be logged in to view that page")
+      (resp/redirect "/"))))
 
 
 (defroutes dashboard-routes

@@ -3,9 +3,7 @@
 
 
 (defn logged-in? []
-  (if (session/get :user-id)
-    true
-    false))
+  (not (nil? (session/get :user-id))))
 
 
 (defn current-user []

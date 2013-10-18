@@ -49,3 +49,16 @@
       (should-not-contain "Users" (t/text {:tag :body}))
       (should-not-contain "Feed" (t/text {:tag :body}))
       (should-contain "Incorrect credentials" (t/text "div.alert"))))
+
+
+(describe "without logging in"
+
+  (before-all (t/set-driver! {:broser :firefox}))
+  (after-all (t/quit))
+
+  (it "should not allow access to the dashboard page"
+      (t/to (str util/site-root "/dashboard"))
+      (should-not-contain "Dashboard"
+                          (t/text {:tag :body}))
+      (should-contain "You must be logged in"
+                      (t/text "div.alert"))))
