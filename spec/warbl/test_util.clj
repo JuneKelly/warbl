@@ -21,6 +21,7 @@
 (defn stop-browser []
   (t/quit))
 
+
 ;; DB helpers
 (mg/connect-via-uri! (config :db-url))
 

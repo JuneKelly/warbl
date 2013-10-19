@@ -3,6 +3,8 @@
 {% endblock %}
 {% block content %}
   <div class="col-md-4">
+    <h2>Register A New Account:</h2>
+    <br />
     <form action="{{servlet-context}}/register" method="POST" role="form">
       <div class="form-group">
         <label for="id">User ID</label>
@@ -49,6 +51,10 @@
         </p>
       <input class="btn btn-primary" tabindex="4" type="submit" value="Create Account!">
     </form>
+    <div>
+      <hr />
+      <p>Already have an account? <a href="/">Log In here</a></p>
+    </div>
   </div>
 {% endblock %}
 
