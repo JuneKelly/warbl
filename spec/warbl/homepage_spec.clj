@@ -18,7 +18,7 @@
       (should-contain "warbl" (t/text {:tag :a, :class "navbar-brand"})))
 
   (it "should have a welcome message somewhere on the page"
-      (should-contain "Welcome to warbl" (t/text {:tag :body})))
+      (should-contain "Welcome to warbl" (t/text "#main-content")))
 
   (it "should have a login button visible"
       (t/exists? "input.btn[value=Login]"))

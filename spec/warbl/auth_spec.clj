@@ -30,9 +30,10 @@
 
   (it "should allow a user to log in"
       (util/login-userone)
-      (should-contain "userone" (t/text {:tag :body}))
-      (should-contain "Dashboard" (t/text {:tag :body}))
-      (should-contain "Logged in!!!" (t/text "div.alert"))))
+      (should-contain "userone" (t/text "#main-menu"))
+      (should-contain "Dashboard" (t/text "#main-content"))
+      (should-contain "Logged in!!!" (t/text "div.alert"))
+      (should (t/exists? "a[href='/logout']"))))
 
 
 (describe "attempt login as invalid user"

@@ -22,4 +22,4 @@
 
   (it "should have basic labels"
       (t/to (str util/site-root "/profile"))
-      (should-contain "User details for:" (t/text {:tag :body}))))
+      (should-contain "User details for:" (t/text "#main-content"))))
