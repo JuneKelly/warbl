@@ -13,6 +13,14 @@
 (def site-root (config :site-url))
 
 
+;; Driver helpers
+(defn start-browser []
+  (t/set-driver! {:browser :firefox}))
+
+
+(defn stop-browser []
+  (t/quit))
+
 ;; DB helpers
 (mg/connect-via-uri! (config :db-url))
 

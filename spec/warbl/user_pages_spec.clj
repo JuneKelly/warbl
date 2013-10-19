@@ -9,7 +9,7 @@
 
 (describe "user profile"
   (before-all
-    (t/set-driver! {:browser :firefox})
+    (util/start-browser)
     (util/drop-database!)
     (util/populate-users)
     (do (t/to util/site-root)
@@ -17,7 +17,7 @@
           {"#id" "userone"}
           {"#pass" "password"}
           {"input.btn[value=Login]" t/click})))
-  (after-all (t/quit))
+  (after-all (util/stop-browser))
 
 
   (it "should have basic labels"

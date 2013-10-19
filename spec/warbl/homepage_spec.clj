@@ -9,8 +9,8 @@
 
 (describe "homepage, with guest user"
 
-  (before-all (t/set-driver! {:browser :firefox}))
-  (after-all (t/quit))
+  (before-all (util/start-browser))
+  (after-all (util/stop-browser))
 
   (before (t/to util/site-root))
 

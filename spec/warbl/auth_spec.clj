@@ -10,8 +10,8 @@
 
 (describe "login form on homepage"
 
-  (before-all (t/set-driver! {:browser :firefox}))
-  (after-all (t/quit))
+  (before-all (util/start-browser))
+  (after-all (util/stop-browser))
 
   (it "should have a login button visible"
       (t/exists? "input.btn[value=Login]"))
@@ -22,8 +22,8 @@
 
 (describe "login as existing user"
 
-  (before-all (t/set-driver! {:browser :firefox}))
-  (after-all (t/quit))
+  (before-all (util/start-browser))
+  (after-all (util/stop-browser))
 
   (before (util/drop-database!)
           (util/populate-users))
@@ -38,8 +38,8 @@
 
 (describe "attempt login as invalid user"
 
-  (before-all (t/set-driver! {:browser :firefox}))
-  (after-all (t/quit))
+  (before-all (util/start-browser))
+  (after-all (util/stop-browser))
 
   (it "should not log in"
       (t/to util/site-root)
@@ -54,8 +54,8 @@
 
 (describe "without logging in"
 
-  (before-all (t/set-driver! {:broser :firefox}))
-  (after-all (t/quit))
+  (before-all (util/start-browser))
+  (after-all (util/stop-browser))
 
   (it "should not allow access to the dashboard page"
       (t/to (str util/site-root "/dashboard"))
