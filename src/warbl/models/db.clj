@@ -1,6 +1,6 @@
 (ns warbl.models.db
   (:require [warbl.models.schema :as schema])
-  (:require [warbl.env :refer [config]])
+  (:require [warbl.env :as env])
   (:require [monger.core :as mg])
   (:require [monger.collection :as mc])
   (:import  [org.bson.types ObjectId]
@@ -8,7 +8,7 @@
   (:require [monger.query :as mq]))
 
 
-(mg/connect-via-uri! (config :db-url))
+(mg/connect-via-uri! env/db-url)
 
 
 ;; Users
