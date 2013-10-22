@@ -41,21 +41,6 @@
     (register id)))
 
 
-(defn profile []
-  (if (auth/logged-in?)
-    (layout/render
-      "profile.html"
-      {:user (db/get-user (auth/current-user))})
-    (resp/redirect "/")))
-
-
-(defn update-profile [{:keys [first-name last-name email]}]
-  (if (auth/logged-in?)
-    (do
-      (db/update-user (auth/current-user) first-name last-name email)
-      (session/flash-put! :flash-success "Profile updated!")
-      (resp/redirect "/profile"))))
-
 
 (defn handle-login [id pass]
   (if-let [user (db/get-user id)]
@@ -80,16 +65,9 @@
 (defroutes auth-routes
   (GET "/register" []
        (register))
-
   (POST "/register" [id pass pass1]
         (handle-registration id pass pass1))
-
-  (GET "/profile" [] (profile))
-
-  (POST "/update-profile" {params :params} (update-profile params))
-
   (POST "/login" [id pass]
         (handle-login id pass))
-
   (GET "/logout" []
         (logout)))
