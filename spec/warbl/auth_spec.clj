@@ -5,7 +5,7 @@
         [warbl.handler])
   (:require [clj-webdriver.taxi :as t]
             [warbl.env :refer [config]]
-            [warbl.test-util :as util]))
+            [warbl.spec-helpers :as util]))
 
 
 (describe "login form on homepage"

@@ -1,4 +1,4 @@
-(ns warbl.test-util
+(ns warbl.spec-helpers
   (:require [warbl.models.db :as db]
             [warbl.env :as env]
             [monger.core :as mg]

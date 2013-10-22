@@ -4,7 +4,7 @@
         [ring.mock.request]
         [warbl.handler])
   (:require [clj-webdriver.taxi :as t]
-            [warbl.test-util :as util]))
+            [warbl.spec-helpers :as util]))
 
 
 (describe "user profile"
