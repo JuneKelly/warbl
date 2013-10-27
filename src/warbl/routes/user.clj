@@ -7,7 +7,7 @@
             [noir.util.crypt :as crypt]
             [warbl.models.db :as db]
             [warbl.helpers.auth :as auth]
-            [clavatar.core :refer [gravatar]]))
+            [warbl.helpers.gravatar :refer [gravatar-large]]))
 
 
 (defn profile []
@@ -15,9 +15,7 @@
     (let [user (db/get-user (auth/current-user))]
       (layout/render "profile.html"
         {:user user
-         :gravatar-url (gravatar (user :email)
-                                 :size 300
-                                 :default :mm)}))
+         :gravatar-url (gravatar-large user)}))
     (resp/redirect "/")))
 
 
