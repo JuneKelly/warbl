@@ -14,7 +14,7 @@
 ;; Users
 (defn create-user [id, pass]
   (let [doc {:_id id, :password pass,
-             :created (new java.util.Date)}]
+             :created (java.util.Date. )}]
     (mc/insert "users" doc)))
 
 
