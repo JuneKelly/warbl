@@ -10,11 +10,19 @@
             [warbl.models.db :as db]))
 
 
+(defn setup-user []
+  (util/drop-database!)
+  (db/create-user "testuser" "fakepasswordhash"))
+
+
 (describe "user creation"
-  (before-all (util/drop-database!)
-              (db/create-user "testuser" "fakepasswordhash"))
+  (before-all (setup-user))
   (after-all  (util/drop-database!))
           
   (it "should have expected fields set"
       (let [u (db/get-user "testuser")]
-        (should-contain :_id u))))
+        (should-contain :_id u)
+        (should-contain :password u)
+        (should-contain :created u)
+        (should (= "testuser" (u :_id)))
+        (should (= java.util.Date (class (u :created)))))))
