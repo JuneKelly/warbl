@@ -19,6 +19,7 @@
    [environ "0.4.0"]
    [com.novemberain/monger "1.5.0"]
    [clj-webdriver "0.6.0"]
+   [clavatar "0.2.1"]
    ;; bodge,
    ;; see https://github.com/Kodowa/Light-Table-Playground/issues/794
    [org.clojure/core.cache "0.6.3"]

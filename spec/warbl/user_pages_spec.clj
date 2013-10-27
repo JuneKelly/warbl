@@ -22,7 +22,7 @@
 
   (it "should have basic labels"
       (t/to (str util/site-root "/profile"))
-      (should-contain "User details for:" (t/text "#main-content"))))
+      (should-contain "userone" (t/text "h2#username"))))
 
 
 (describe "registration page"

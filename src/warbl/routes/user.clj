@@ -6,14 +6,18 @@
             [noir.validation :as vali]
             [noir.util.crypt :as crypt]
             [warbl.models.db :as db]
-            [warbl.helpers.auth :as auth]))
+            [warbl.helpers.auth :as auth]
+            [clavatar.core :refer [gravatar]]))
 
 
 (defn profile []
   (if (auth/logged-in?)
-    (layout/render
-      "profile.html"
-      {:user (db/get-user (auth/current-user))})
+    (let [user (db/get-user (auth/current-user))]
+      (layout/render "profile.html"
+        {:user user
+         :gravatar-url (gravatar (user :email)
+                                 :size 300
+                                 :default :mm)}))
     (resp/redirect "/")))
 
 

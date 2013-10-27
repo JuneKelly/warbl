@@ -1,7 +1,15 @@
 {% extends "warbl/views/templates/base.html" %}
 {% block content %}
+  <h2 id="username">{{user._id}}</h2>
+  <div class="col-md-4" id="gravatar">
+    <br />
+    <img src="{{gravatar-url}}"
+         class="image-rounded img-responsive">
+    </img>
+    <br />
+  </div>
+
   <div class="col-md-4">
-    <h2>User details for: {{user._id}}</h2>
     <br />
     <form role="form" action="{{servlet-context}}/update-profile" method="POST">
       <div class="form-group">
@@ -44,4 +52,5 @@
       <a class="btn btn-default" href="/">Cancel</a>
     </form>
   </div>
+
 {% endblock %}
