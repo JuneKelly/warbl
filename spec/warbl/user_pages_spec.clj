@@ -46,3 +46,43 @@
       (should-contain "Create Account!"
                        (t/attribute "input.btn[id=create-account]"
                                     :value))))
+
+
+(describe "registration process with valid inputs"
+  (before-all (util/start-browser)
+              (t/to (str util/site-root "/register"))
+              (do (t/quick-fill-submit
+                    {"#id" "userthree"}
+                    {"#pass" "password"}
+                    {"#pass1" "password"}
+                    {"input.btn[id=create-account]" t/click})))
+  (after-all  (util/stop-browser))
+
+  (it "should take the user to their dashboard"
+    (should-contain "Dashboard" (t/text "#main-content")))
+
+  (it "should show a confirmation message"
+    (should-contain "Account Created!" (t/text "div.alert")))
+
+  (it "should have the user logged in"
+    (should-contain "userthree" (t/text "#main-menu"))))
+
+
+(describe "registration process with existing username"
+  (before-all (util/drop-database!)
+              (util/populate-users)
+              (util/start-browser)
+              (t/to (str util/site-root "/register"))
+              (do (t/quick-fill-submit
+                    {"#id" "userone"}
+                    {"#pass" "password"}
+                    {"#pass1" "password"}
+                    {"input.btn[id=create-account]" t/click})))
+  (after-all  (util/stop-browser))
+
+  (it "should redirect to the registration page"
+    (should-not-contain "Dashboard" (t/text "#main-content"))
+    (should-contain "Register A New Account" (t/text "#main-content")))
+
+  (it "should show a warning"
+    (should-contain "That username is not available" (t/text "#main-content"))))

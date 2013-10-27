@@ -30,14 +30,20 @@
 
 (defn handle-registration [id pass pass1]
   (if (valid? id pass pass1)
-    (try
-      (do
-        (db/create-user id (crypt/encrypt pass))
-        (auth/log-in id)
-        (resp/redirect "/"))
-      (catch Exception ex
-        (vali/rule false [:id (.getMessage ex)])
-        (register)))
+    (if (db/user-exists? id)
+      (do  ;; username taken
+        (vali/rule false
+                   [:id "That username is not available"])
+        (register id))
+      (try ;; username available
+        (do
+          (db/create-user id (crypt/encrypt pass))
+          (auth/log-in id)
+          (session/flash-put! :flash-success "Account Created!")
+          (resp/redirect "/dashboard"))
+        (catch Exception ex
+          (vali/rule false [:id (.getMessage ex)])
+          (register))))
     (register id)))
 
 
