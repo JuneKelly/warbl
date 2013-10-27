@@ -13,7 +13,8 @@
 
 ;; Users
 (defn create-user [id, pass]
-  (let [doc {:_id id, :password pass}]
+  (let [doc {:_id id, :password pass,
+             :created (new java.util.Date)}]
     (mc/insert "users" doc)))
 
 
@@ -21,7 +22,8 @@
   (mc/update-by-id "users" id
     {:$set {:f_name f-name,
             :l_name l-name,
-            :email email}}))
+            :email email,
+            :updated (new java.util.Date)}}))
 
 
 (defn user-exists? [id]
