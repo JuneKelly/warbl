@@ -37,4 +37,12 @@
   (it "should have form labels"
       (should-contain "User ID" (t/text "label[for=id]"))
       (should-contain "Password" (t/text "label[for=pass]"))
-      (should-contain "Retype Password" (t/text "label[for=pass1]"))))
+      (should-contain "Retype Password" (t/text "label[for=pass1]")))
+  (it "should have form inputs"
+      (should (t/exists? "input[name=id]"))
+      (should (t/exists? "input[name=pass]"))
+      (should (t/exists? "input[name=pass1]"))
+      (should (t/exists? "input.btn[id=create-account]"))
+      (should-contain "Create Account!"
+                       (t/attribute "input.btn[id=create-account]"
+                                    :value))))
