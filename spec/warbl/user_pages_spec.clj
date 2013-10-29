@@ -16,7 +16,6 @@
     (util/login-userone))
   (after-all (util/stop-browser))
 
-
   (it "should have basic labels"
       (t/to (str util/site-root "/profile"))
       (should-contain "userone" (t/text "h2#username"))))
