@@ -13,11 +13,7 @@
     (util/start-browser)
     (util/drop-database!)
     (util/populate-users)
-    (do (t/to util/site-root)
-        (t/quick-fill-submit
-          {"#id" "userone"}
-          {"#pass" "password"}
-          {"input.btn[value=Login]" t/click})))
+    (util/login-userone))
   (after-all (util/stop-browser))
 
 
@@ -39,6 +35,7 @@
       (should-contain "User ID" (t/text "label[for=id]"))
       (should-contain "Password" (t/text "label[for=pass]"))
       (should-contain "Retype Password" (t/text "label[for=pass1]")))
+
   (it "should have form inputs"
       (should (t/exists? "input[name=id]"))
       (should (t/exists? "input[name=pass]"))
