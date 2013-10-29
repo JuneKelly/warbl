@@ -4,7 +4,8 @@
         [ring.mock.request]
         [warbl.handler])
   (:require [clj-webdriver.taxi :as t]
-            [warbl.spec-helpers :as util]))
+            [warbl.spec-helpers :as util]
+            [warbl.models.db :as db]))
 
 
 (describe "user profile"
@@ -65,7 +66,12 @@
     (should-contain "Account Created!" (t/text "div.alert")))
 
   (it "should have the user logged in"
-    (should-contain "userthree" (t/text "#main-menu"))))
+    (should-contain "userthree" (t/text "#main-menu")))
+
+  (it "should have created a new user"
+    (let [new-u (db/get-user "userthree")]
+      (should-not-be-nil new-u)
+      (should (= (new-u :_id) "userthree")))))
 
 
 (describe "registration process with existing username"
