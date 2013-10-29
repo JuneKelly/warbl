@@ -8,7 +8,7 @@
             [warbl.models.db :as db]))
 
 
-(describe "user profile"
+(describe "user profile for logged-in user"
   (before-all
     (util/start-browser)
     (util/drop-database!)
