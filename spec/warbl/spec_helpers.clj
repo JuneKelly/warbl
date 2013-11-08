@@ -15,7 +15,7 @@
 
 ;; Driver helpers
 (defn start-browser []
-  (t/set-driver! {:browser :firefox}))
+  (t/set-driver! {:browser :chrome}))
 
 
 (defn stop-browser []

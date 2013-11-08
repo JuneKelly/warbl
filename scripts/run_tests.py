@@ -2,18 +2,20 @@
 import subprocess
 import pexpect
 import time
+from xvfbwrapper import Xvfb
 
 
 print '<>> Starting test server and running specs...'
 
-srv = pexpect.spawn('lein with-profile test trampoline ring server-headless')
+with Xvfb() as display:
+    srv = pexpect.spawn('lein with-profile test trampoline ring server-headless')
 
-time.sleep(5)
+    time.sleep(5)
 
-subprocess.call(' '.join(['lein', 'with-profile', 'test', 'spec']),
-                shell=True)
+    subprocess.call(' '.join(['lein', 'with-profile', 'test', 'spec']),
+                    shell=True)
 
-print '<<>>'
+    print '<<>>'
 
-srv.terminate()
-print '<>> Test server stopped...'
+    srv.terminate()
+    print '<>> Test server stopped...'
