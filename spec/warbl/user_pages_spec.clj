@@ -13,12 +13,21 @@
     (util/start-browser)
     (util/drop-database!)
     (util/populate-users)
-    (util/login-userone))
+    (util/login-userone)
+    (t/to (str util/site-root "/profile")))
   (after-all (util/stop-browser))
 
   (it "should have basic labels"
-      (t/to (str util/site-root "/profile"))
-      (should-contain "userone" (t/text "h2#username"))))
+      (should-contain "userone" (t/text "h2#username")))
+
+  (it "should have form elements"
+      (should (t/exists? "input[name='first-name']"))
+      (should (t/exists? "input[name='last-name']"))
+      (should (t/exists? "input[name='email']"))
+      (should (t/exists? "input[type='submit']"))
+      (should-contain "Update Profile"
+                      (t/attribute "input.btn[type='submit']"
+                                   :value))))
 
 
 (describe "registration page"
@@ -87,4 +96,5 @@
     (should-contain "Register A New Account" (t/text "#main-content")))
 
   (it "should show a warning"
-    (should-contain "That username is not available" (t/text "#main-content"))))
+    (should-contain "That username is not available"
+                    (t/text "#main-content"))))
