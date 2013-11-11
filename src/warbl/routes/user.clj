@@ -27,7 +27,7 @@
     (do
       (db/update-user (auth/current-user) first-name last-name email)
       (session/flash-put! :flash-success "Profile updated!")
-      (resp/redirect "/profile"))))
+      (resp/redirect (str "/profile/" (auth/current-user))))))
 
 
 (defroutes user-routes
