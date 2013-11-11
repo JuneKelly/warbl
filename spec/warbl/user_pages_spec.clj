@@ -14,7 +14,7 @@
     (util/drop-database!)
     (util/populate-users)
     (util/login-userone)
-    (t/to (str util/site-root "/profile")))
+    (t/to (str util/site-root "/profile/userone")))
   (after-all (util/stop-browser))
 
   (it "should have basic labels"

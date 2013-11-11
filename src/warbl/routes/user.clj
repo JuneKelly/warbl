@@ -10,13 +10,16 @@
             [warbl.helpers.gravatar :refer [gravatar-large]]))
 
 
-(defn profile []
-  (if (auth/logged-in?)
-    (let [user (db/get-user (auth/current-user))]
-      (layout/render "profile.html"
-        {:user user
-         :gravatar-url (gravatar-large user)}))
-    (resp/redirect "/")))
+(defn is-current-user? [id]
+  (= (auth/current-user) id))
+
+
+(defn profile [id]
+  (let [user (db/get-user id)]
+    (layout/render "profile.html"
+      {:user user
+       :is-current-user (is-current-user? id)
+       :gravatar-url (gravatar-large user)})))
 
 
 (defn update-profile [{:keys [first-name last-name email]}]
@@ -28,5 +31,5 @@
 
 
 (defroutes user-routes
-  (GET "/profile" [] (profile))
+  (GET "/profile/:id" [id] (profile id))
   (POST "/update-profile" {params :params} (update-profile params)))

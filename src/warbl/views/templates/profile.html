@@ -7,12 +7,15 @@
          class="img-responsive img-rounded">
     </img>
     <br />
-    <small>Go to <a href="http://gravatar.com">gravatar.com</a> to change your profile picture</small>
+    {% if is-current-user %}
+      <small>Go to <a href="http://gravatar.com">gravatar.com</a> to change your profile picture</small>
+    {% endif %}
     <br />
   </div>
 
   <div class="col-md-4">
     <br />
+    {% if is-current-user %}
     <form role="form" action="{{servlet-context}}/update-profile" method="POST">
       <div class="form-group">
         <label for="id">First Name</label>
@@ -53,6 +56,14 @@
       <input class="btn btn-success" tabindex="4" type="submit" value="Update Profile">
       <a class="btn btn-default" href="/">Cancel</a>
     </form>
+    {% else %}
+    <p>
+      <h3>{{user.f_name}} {{user.l_name}}</h3>
+    </p>
+    <p>
+      <strong>email:</strong> {{user.email}}
+    </p>
+    {% endif %}
     <br />
   </div>
 
