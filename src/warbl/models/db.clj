@@ -25,6 +25,7 @@
             :l_name last-name,
             :email email,
             :location location,
+            :r (rand),
             :updated (new java.util.Date)}}))
 
 
