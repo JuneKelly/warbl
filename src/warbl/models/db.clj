@@ -40,3 +40,7 @@
 
 (defn get-all-users []
   (mc/find-maps "users" {}))
+
+
+(defn get-random-users [& {:keys [maximum]}]
+  (comment "todo"))
