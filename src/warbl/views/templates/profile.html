@@ -18,7 +18,7 @@
     {% if is-current-user %}
     <form role="form" action="{{servlet-context}}/update-profile" method="POST">
       <div class="form-group">
-        <label for="id">First Name</label>
+        <label for="first-name">First Name</label>
         <p>
           <input id="first-name"
                  name="first-name"
@@ -31,7 +31,7 @@
       </div>
 
       <div class="form-group">
-        <label for="id">Last Name</label>
+        <label for="last-name">Last Name</label>
         <p>
           <input id="last-name" name="last-name"
                  tabindex="1" type="text" value="{{user.l_name}}"
@@ -41,7 +41,7 @@
       </div>
 
       <div class="form-group">
-        <label for="id">Email</label>
+        <label for="email">Email</label>
         <p>
           <input id="email"
                  name="email"
@@ -53,7 +53,7 @@
         </p>
       </div>
       <div class="form-group">
-        <label for="id">Location</label>
+        <label for="location">Location</label>
         <p>
           <input id="location"
                  name="location"
