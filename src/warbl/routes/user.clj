@@ -22,11 +22,13 @@
        :gravatar-url (gravatar-large user)})))
 
 
-(defn update-profile [{:keys [first-name last-name email]}]
+(defn update-profile [user-details]
   (if (auth/logged-in?)
     (do
-      (db/update-user (auth/current-user) first-name last-name email)
-      (session/flash-put! :flash-success "Profile updated!")
+      (db/update-user (auth/current-user)
+                      user-details)
+      (session/flash-put! :flash-success
+                          "Profile updated!")
       (resp/redirect (str "/profile/" (auth/current-user))))))
 
 

@@ -18,11 +18,13 @@
     (mc/insert "users" doc)))
 
 
-(defn update-user [id f-name l-name email]
+(defn update-user [id {:keys [first-name last-name email location]
+                    :as user-details}]
   (mc/update-by-id "users" id
-    {:$set {:f_name f-name,
-            :l_name l-name,
+    {:$set {:f_name first-name,
+            :l_name last-name,
             :email email,
+            :location location,
             :updated (new java.util.Date)}}))
 
 
