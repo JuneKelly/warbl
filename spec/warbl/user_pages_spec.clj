@@ -27,7 +27,23 @@
       (should (t/exists? "input[type='submit']"))
       (should-contain "Update Profile"
                       (t/attribute "input.btn[type='submit']"
-                                   :value))))
+                                   :value)))
+
+  (it "should update details"
+      (t/quick-fill-submit {"input[name='first-name']" "ASDF"}
+                           {"input[name='last-name']" "QWER"}
+                           {"input[name='email']" "zxcv@hjkl.com"}
+                           {"input[type='submit']" t/click})
+      (should-contain
+        "ASDF" (t/attribute "input[name='first-name']"
+                            :value))
+      (should-contain
+        "QWER" (t/attribute "input[name='last-name']"
+                            :value))
+      (should-contain
+        "zxcv@hjkl.com" (t/attribute "input[name='email']"
+                                     :value))
+      (should-contain "Profile updated!" (t/text ".alert-success"))))
 
 
 (describe "registration page"
