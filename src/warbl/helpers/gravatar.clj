@@ -16,12 +16,12 @@
 
 
 (defn add-small-gravatar [u]
-  (if (coll? u)
+  (if (or (list? u) (vector? u) (seq? u))
     (map add-small-gravatar u)
     (assoc u :g-small (gravatar-small u))))
 
 
 (defn add-large-gravatar [u]
-  (if (coll? u)
+  (if (or (list? u) (vector? u) (seq? u))
     (map add-large-gravatar u)
     (assoc u :g-large (gravatar-large u))))
