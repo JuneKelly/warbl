@@ -43,4 +43,7 @@
 
 
 (defn get-random-users [& {:keys [maximum]}]
-  (comment "todo"))
+  (let [ra (rand) m (or maximum 16)]
+    (mq/with-collection "users"
+      (mq/find {:r {"$gte" ra}})
+      (mq/limit m))))

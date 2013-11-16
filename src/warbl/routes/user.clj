@@ -32,6 +32,19 @@
       (resp/redirect (str "/profile/" (auth/current-user))))))
 
 
+(defn user-list []
+  (if (auth/logged-in?)
+    (do
+      (let [users (db/get-random-users)]
+        (layout/render "user_list.html"
+          {:users users})))
+    (do
+      (session/flash-put! :flash-warning
+                          "You can't do that")
+      (resp/redirect "/"))))
+
+
 (defroutes user-routes
   (GET "/profile/:id" [id] (profile id))
-  (POST "/update-profile" {params :params} (update-profile params)))
+  (POST "/update-profile" {params :params} (update-profile params))
+  (GET "/users" [] (user-list)))
