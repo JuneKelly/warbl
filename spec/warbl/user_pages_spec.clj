@@ -14,7 +14,8 @@
     (util/drop-database!)
     (util/populate-users)
     (util/login-userone)
-    (t/to (str util/site-root "/profile/userone")))
+    (util/visit "/profile/userone"))
+
   (after-all (util/stop-browser))
 
   (it "should have basic labels"
@@ -48,7 +49,7 @@
 
 (describe "registration page"
   (before-all (util/start-browser)
-              (t/to (str util/site-root "/register")))
+              (util/visit "/register"))
   (after-all  (util/stop-browser))
 
   (it "should have heading"
@@ -72,7 +73,7 @@
 
 (describe "registration process with valid inputs"
   (before-all (util/start-browser)
-              (t/to (str util/site-root "/register"))
+              (util/visit "/register")
               (do (t/quick-fill-submit
                     {"#id" "userthree"}
                     {"#pass" "password"}
