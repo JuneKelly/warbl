@@ -7,8 +7,9 @@
             [noir.util.crypt :as crypt]
             [warbl.models.db :as db]
             [warbl.helpers.auth :as auth]
+            [warbl.helpers.routes :refer [kick-to-root]]
             [warbl.helpers.gravatar
-             :refer [gravatar-large add-small-gravatars]]))
+             :refer [gravatar-large add-small-gravatar]]))
 
 
 (defn is-current-user? [id]
@@ -36,15 +37,10 @@
 (defn user-list []
   (if (auth/logged-in?)
     (do
-      (let [users (add-small-gravatars (db/get-random-users))]
+      (let [users (add-small-gravatar (db/get-random-users))]
         (layout/render "user_list.html"
           {:users users})))
-    (do
-      (session/flash-put! :flash-warning
-                          "You can't do that")
-      (resp/redirect "/"))))
-
-
+    (kick-to-root)))
 
 
 (defroutes user-routes

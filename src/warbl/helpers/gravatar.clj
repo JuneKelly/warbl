@@ -15,9 +15,13 @@
                   :size 100))
 
 
-(defn add-small-gravatar [user]
-  (assoc user :g-small (gravatar-small user)))
+(defn add-small-gravatar [u]
+  (if (coll? u)
+    (map add-small-gravatar u)
+    (assoc u :g-small (gravatar-small u))))
 
 
-(defn add-small-gravatars [users]
-  (map add-small-gravatar users))
+(defn add-large-gravatar [u]
+  (if (coll? u)
+    (map add-large-gravatar u)
+    (assoc u :g-large (gravatar-large u))))
