@@ -7,8 +7,8 @@
             [noir.util.crypt :as crypt]
             [warbl.models.db :as db]
             [warbl.helpers.auth :as auth]
-            [warbl.helpers.gravatar :refer [gravatar-large
-                                            gravatar-small]]))
+            [warbl.helpers.gravatar
+             :refer [gravatar-large add-small-gravatars]]))
 
 
 (defn is-current-user? [id]
@@ -32,9 +32,6 @@
                           "Profile updated!")
       (resp/redirect (str "/profile/" (auth/current-user))))))
 
-
-(defn add-small-gravatars [users]
-  (map #(assoc %1 :g-small (gravatar-small %1)) users))
 
 (defn user-list []
   (if (auth/logged-in?)
