@@ -1,4 +1,9 @@
 {% extends "warbl/views/templates/base.html" %}
 {% block content %}
 <h2>People</h2>
+<div class="col-md-6">
+  {% for u in users %}
+  <p><img src="{{u.g-small}}" /></p>
+  {% endfor %}
+</div>
 {% endblock %}
