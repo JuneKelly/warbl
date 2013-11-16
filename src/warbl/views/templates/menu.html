@@ -2,18 +2,11 @@
 {% if user-id %}
   <div class="btn-group pull-right">
     <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-user"></i>{{user-id}} <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
           <li><a href="{{servlet-context}}/dashboard">Dashboard</a></li>
           <li class="divider"></li>
-          <li><a href="{{servlet-context}}/profile/{{user-id}}">Profile</a></li>
+          <li><a href="{{servlet-context}}/profile/{{user-id}}">{{user-id}}</a></li>
           <li class="divider"></li>
           <li><a href="{{servlet-context}}/logout">Sign Out</a></li>
-        </ul>
-      </li>
     </ul>
   </div>
   {% else %}
