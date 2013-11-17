@@ -60,7 +60,7 @@
 
 (defn has-contact [user-id contact-id]
   (let [u (get-user user-id)]
-    (if (some #(= contact-id %) (u :contacts))
+    (if (contains? (set (u :contacts)) contact-id)
       true
       false)))
 
