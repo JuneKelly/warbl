@@ -1,12 +1,14 @@
 {% extends "warbl/views/templates/base.html" %}
 {% block content %}
 <h2>People</h2>
-<div class="col-md-6">
+<div class="col-md-12">
   {% for u in users %}
-  <p>
-    <a href="{{servlet-context}}/profile/{{u._id}}"><img src="{{u.g-small}}" /></a>
-    <span>{{u._id}}</span>
-  </p>
+  <div class="col-md-3">
+    <p>
+      <a href="{{servlet-context}}/profile/{{u._id}}"><img src="{{u.g-small}}" /></a>
+      <span>{{u._id}}</span>
+    </p>
+  </div>
   {% endfor %}
 </div>
 {% endblock %}

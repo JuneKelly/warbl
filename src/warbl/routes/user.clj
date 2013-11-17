@@ -31,13 +31,15 @@
                       user-details)
       (session/flash-put! :flash-success
                           "Profile updated!")
-      (resp/redirect (str "/profile/" (auth/current-user))))))
+      (resp/redirect (str "/profile/"
+                          (auth/current-user))))
+    (kick-to-root)))
 
 
 (defn user-list []
   (if (auth/logged-in?)
     (do
-      (let [users (add-small-gravatar (db/get-random-users))]
+      (let [users (add-small-gravatar (db/get-all-users))]
         (layout/render "user_list.html"
           {:users users})))
     (kick-to-root)))
