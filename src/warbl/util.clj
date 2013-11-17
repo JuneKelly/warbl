@@ -11,4 +11,7 @@
     (md/md-to-html-string)))
 
 
-(def datetime (new java.util.Date))
+(defn datetime [] (new java.util.Date))
+
+
+(defn uuid [] (str (java.util.UUID/randomUUID)))
