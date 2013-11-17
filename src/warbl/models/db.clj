@@ -51,6 +51,20 @@
       (mq/limit m))))
 
 
+(defn add-contact [user-id contact-id]
+  (mc/update-by-id
+    "users"
+    user-id
+    {:$addToSet {:contacts contact-id}}))
+
+
+(defn has-contact [user-id contact-id]
+  (let [u (get-user user-id)]
+    (if (some #(= contact-id %) (u :contacts))
+      true
+      false)))
+
+
 ;; Messages
 (defn create-message
   [{:keys [from-user-id to-user-id text]}]
