@@ -22,14 +22,12 @@
     (mc/insert "users" doc)))
 
 
-(defn update-user [id {:keys [first-name
-                              last-name
-                              email
-                              location]
-                    :as user-details}]
+(defn update-user [id
+                   {:keys [full-name
+                           email
+                           location]}]
   (mc/update-by-id "users" id
-    {:$set {:f_name first-name,
-            :l_name last-name,
+    {:$set {:full_name full-name
             :email email,
             :location location,
             :gravatars (get-gravatars email)

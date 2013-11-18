@@ -44,6 +44,7 @@
 
 (defn login-userone []
   (t/to site-root)
-  (t/quick-fill-submit {"#id" "userone"}
-                       {"#pass" "password"}
+  (Thread/sleep 1000)
+  (t/quick-fill-submit {"input#id" "userone"}
+                       {"input#pass" "password"}
                        {"input.btn[value=Login]" t/click}))

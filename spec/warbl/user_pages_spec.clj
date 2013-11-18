@@ -22,8 +22,7 @@
       (should-contain "userone" (t/text "h2#username")))
 
   (it "should have form elements"
-      (should (t/exists? "input[name='first-name']"))
-      (should (t/exists? "input[name='last-name']"))
+      (should (t/exists? "input[name='full-name']"))
       (should (t/exists? "input[name='email']"))
       (should (t/exists? "input[type='submit']"))
       (should-contain "Update Profile"
@@ -31,15 +30,11 @@
                                    :value)))
 
   (it "should update details"
-      (t/quick-fill-submit {"input[name='first-name']" "ASDF"}
-                           {"input[name='last-name']" "QWER"}
+      (t/quick-fill-submit {"input[name='full-name']" "ASDF"}
                            {"input[name='email']" "zxcv@hjkl.com"}
                            {"input[type='submit']" t/click})
       (should-contain
-        "ASDF" (t/attribute "input[name='first-name']"
-                            :value))
-      (should-contain
-        "QWER" (t/attribute "input[name='last-name']"
+        "ASDF" (t/attribute "input[name='full-name']"
                             :value))
       (should-contain
         "zxcv@hjkl.com" (t/attribute "input[name='email']"
