@@ -6,7 +6,9 @@
             [noir.validation :as vali]
             [noir.util.crypt :as crypt]
             [warbl.models.db :as db]
-            [warbl.helpers.auth :as auth]))
+            [warbl.helpers.auth :as auth]
+            [warbl.helpers.gravatar
+             :refer [get-gravatars]]))
 
 
 (defn valid? [id pass pass1]

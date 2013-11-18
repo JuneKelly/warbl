@@ -5,7 +5,7 @@
   {% for u in users %}
   <div class="col-md-3">
     <p>
-      <a href="{{servlet-context}}/profile/{{u._id}}"><img src="{{u.g-small}}" /></a>
+      <a href="{{servlet-context}}/profile/{{u._id}}"><img src="{{u.gravatars.small}}" /></a>
       <span>{{u._id}}</span>
     </p>
   </div>

@@ -4,7 +4,8 @@
             [monger.core :as mg]
             [monger.collection :as mc]
             [monger.query :as mq]
-            [warbl.util :refer [datetime uuid]])
+            [warbl.util :refer [datetime uuid]]
+            [warbl.helpers.gravatar :refer [get-gravatars]])
   (:import  [org.bson.types ObjectId]
             [com.mongodb DB WriteConcern]))
 
@@ -16,17 +17,22 @@
 (defn create-user [id, pass]
   (let [doc {:_id id, :password pass,
              :created (datetime),
+             :gravatars (get-gravatars nil),
              :r (rand)}]
     (mc/insert "users" doc)))
 
 
-(defn update-user [id {:keys [first-name last-name email location]
+(defn update-user [id {:keys [first-name
+                              last-name
+                              email
+                              location]
                     :as user-details}]
   (mc/update-by-id "users" id
     {:$set {:f_name first-name,
             :l_name last-name,
             :email email,
             :location location,
+            :gravatars (get-gravatars email)
             :r (rand),
             :updated (datetime)}}))
 

@@ -9,7 +9,7 @@
             [warbl.helpers.auth :as auth]
             [warbl.helpers.routes :refer [kick-to-root]]
             [warbl.helpers.gravatar
-             :refer [gravatar-large add-small-gravatar]]))
+             :refer [get-gravatars]]))
 
 
 (defn is-current-user? [id]
@@ -20,26 +20,25 @@
   (let [user (db/get-user id)]
     (layout/render "profile.html"
       {:user user
-       :is-current-user (is-current-user? id)
-       :gravatar-url (gravatar-large user)})))
+       :is-current-user (is-current-user? id)})))
 
 
 (defn update-profile [user-details]
   (if (auth/logged-in?)
     (do
-      (db/update-user (auth/current-user)
-                      user-details)
-      (session/flash-put! :flash-success
-                          "Profile updated!")
-      (resp/redirect (str "/profile/"
-                          (auth/current-user))))
+      (db/update-user
+        (auth/current-user) user-details)
+      (session/flash-put!
+        :flash-success "Profile updated!")
+      (resp/redirect
+        (str "/profile/" (auth/current-user))))
     (kick-to-root)))
 
 
 (defn user-list []
   (if (auth/logged-in?)
     (do
-      (let [users (add-small-gravatar (db/get-all-users))]
+      (let [users (db/get-all-users)]
         (layout/render "user_list.html"
           {:users users})))
     (kick-to-root)))
