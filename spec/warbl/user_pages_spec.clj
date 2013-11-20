@@ -28,6 +28,8 @@
       (should-contain "Update Profile"
                       (t/attribute "input.btn[type='submit']"
                                    :value)))
+  (it "should have an image"
+      (should (t/exists? "img.img-responsive")))
 
   (it "should update details"
       (t/quick-fill-submit {"input[name='full-name']" "ASDF"}
