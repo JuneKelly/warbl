@@ -20,7 +20,7 @@
                             (str "Message sent to " to-user-id))
         (resp/redirect (str "/profile/" to-user-id))))
     (do
-      (kick-to-root))))
+      (kick-to-root "You should log in or create an account first"))))
 
 
 (defn get-conversation [with-user-id]
