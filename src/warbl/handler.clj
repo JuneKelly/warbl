@@ -6,6 +6,7 @@
             [com.postspectacular.rotor :as rotor]
             [warbl.routes.home :refer [home-routes]]
             [warbl.routes.auth :refer [auth-routes]]
+            [warbl.routes.message :refer [message-routes]]
             [warbl.routes.user :refer [user-routes]]
             [warbl.routes.dashboard :refer [dashboard-routes]]
             [warbl.models.schema :as schema]))
@@ -50,6 +51,7 @@
     user-routes
     dashboard-routes
     home-routes
+    message-routes
     app-routes]
    :middleware
    []
