@@ -24,7 +24,16 @@
 
 
 (defn get-conversation [with-user-id]
-  (comment "todo"))
+  (if (auth/logged-in?)
+    (let [current-user-id (auth/current-user)
+          messages (db/get-messages
+                      {:from-user-id current-user-id
+                       :to-user-id with-user-id})]
+      (do
+        (println messages)
+        (resp/redirect "/")))
+    (do
+      (kick-to-root))))
 
 
 (defroutes message-routes
