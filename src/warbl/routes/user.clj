@@ -16,11 +16,17 @@
   (= (auth/current-user) id))
 
 
+(defn current-user-has-contact [user-id]
+  (and (auth/logged-in?)
+       (db/has-contact (auth/current-user) user-id)))
+
+
 (defn profile [id]
   (let [user (db/get-user id)]
     (layout/render "profile.html"
       {:user user
-       :is-current-user (is-current-user? id)})))
+       :is-current-user (is-current-user? id)
+       :current-user-has-contact (current-user-has-contact id)})))
 
 
 (defn update-profile [user-details]

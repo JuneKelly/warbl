@@ -55,11 +55,16 @@
       (mq/limit m))))
 
 
+;; Contacts
 (defn add-contact [user-id contact-id]
-  (mc/update-by-id
-    "users"
-    user-id
-    {:$addToSet {:contacts contact-id}}))
+  (if (and (user-exists? user-id)
+           (user-exists? contact-id))
+    (do
+      (mc/update "users"
+                 {:_id user-id}
+                 {:$addToSet {:contacts contact-id}})
+      true)
+    false))
 
 
 (defn has-contact [user-id contact-id]
@@ -72,12 +77,16 @@
 ;; Messages
 (defn create-message
   [{:keys [from-user-id to-user-id text]}]
-  (let [doc {:_id (uuid)
-             :from from-user-id
-             :to to-user-id
-             :text text
-             :created (datetime)}]
-    (mc/insert "messages" doc)))
+  (if (has-contact from-user-id to-user-id)
+    (do
+      (let [doc {:_id (uuid)
+                 :from from-user-id
+                 :to to-user-id
+                 :text text
+                 :created (datetime)}]
+        (mc/insert "messages" doc))
+      true)
+    false))
 
 
 (defn get-messages [{:keys [from-user-id to-user-id]}]

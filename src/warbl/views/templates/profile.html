@@ -68,7 +68,7 @@
     <br />
   </div>
 
-  {% if not is-current-user %}
+  {% if current-user-has-contact %}
   <div id="message-composer" class="col-md-4">
     <h3>Send {{user._id}} a message</h3>
     <form role="form" action="{{servlet-context}}/message/to/{{user._id}}" method="POST">
@@ -83,6 +83,10 @@
         <input class="btn btn-success" tabindex="4" type="submit" value="Send Message">
       </div>
     </form>
+  </div>
+  {% else %}
+  <div class="col-md-4">
+    <a href="#" class="btn btn-success">Add contact</a>
   </div>
   {% endif %}
 {% endblock %}
