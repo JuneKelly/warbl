@@ -50,7 +50,19 @@
     (kick-to-root)))
 
 
+(defn contacts []
+  (if (auth/logged-in?)
+    (do
+      (let [current-user (auth/current-user)
+            contacts (db/get-contacts current-user)]
+        (layout/render "contacts.html"
+                       {:user current-user
+                        :contacts contacts})))
+    (kick-to-root)))
+
+
 (defroutes user-routes
+  (GET "/contacts"  [] (contacts))
   (GET "/profile/:id" [id] (profile id))
   (POST "/update-profile" {params :params} (update-profile params))
   (GET "/users" [] (user-list)))

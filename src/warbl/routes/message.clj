@@ -23,7 +23,7 @@
       (kick-to-root "You should log in or create an account first"))))
 
 
-(defn get-conversation [with-user-id]
+(defn show-conversation [with-user-id]
   (if (auth/logged-in?)
     (let [current-user-id (auth/current-user)
           messages (db/get-messages

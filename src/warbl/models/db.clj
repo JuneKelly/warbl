@@ -44,6 +44,11 @@
   (mc/find-map-by-id "users" id))
 
 
+(defn get-user-safe [id]
+  (let [user (get-user id)]
+    (dissoc user :password)))
+
+
 (defn get-all-users []
   (mc/find-maps "users" {}))
 
@@ -72,6 +77,14 @@
     (if (contains? (set (u :contacts)) contact-id)
       true
       false)))
+
+
+(defn get-contacts [user-id]
+  (if (user-exists? user-id)
+    (let [user (get-user user-id)
+          contacts (:contacts user)]
+      (map get-user-safe contacts))
+    nil))
 
 
 ;; Messages

@@ -1,9 +1,12 @@
 {% extends "warbl/views/templates/base.html" %}
+
 {% block content %}
-<h2>People</h2>
+
+<h2>Contacts</h2>
 <div class="col-md-12">
-  {% for u in users %}
+  {% for u in contacts %}
     {% include "warbl/views/templates/_user_small.html" %}
   {% endfor %}
 </div>
+
 {% endblock %}
