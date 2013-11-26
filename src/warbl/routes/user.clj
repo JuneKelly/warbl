@@ -56,8 +56,7 @@
       (let [current-user (auth/current-user)
             contacts (db/get-contacts current-user)]
         (layout/render "contacts.html"
-                       {:user current-user
-                        :contacts contacts})))
+                       {:contacts contacts})))
     (kick-to-root)))
 
 
