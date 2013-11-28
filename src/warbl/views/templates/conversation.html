@@ -1,0 +1,16 @@
+{% extends "warbl/views/templates/base.html" %}
+
+{% block content %}
+
+<h2>Chat with {{target-user-id}}</h2>
+
+<div class="col-md-4">
+  {% for msg in messages %}
+    <div class="message">
+      <strong>From: </strong>{{msg.from}}  |  <strong>To: </strong>{{msg.to}}
+      <p>{{msg.text}}</p>
+    </div>
+  {% endfor %}
+</div>
+{% include "warbl/views/templates/_message_composer.html" %}
+{% endblock %}

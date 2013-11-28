@@ -18,7 +18,7 @@
            :text text})
         (session/flash-put! :flash-success
                             (str "Message sent to " to-user-id))
-        (resp/redirect (str "/profile/" to-user-id))))
+        (resp/redirect (str "/conversation/" to-user-id))))
     (do
       (kick-to-root "You should log in or create an account first"))))
 
@@ -30,11 +30,14 @@
                       {:from-user-id current-user-id
                        :to-user-id with-user-id})]
       (do
-        (println messages)
-        (resp/redirect "/")))
+        (layout/render "conversation.html"
+                       {:messages messages
+                        :current-user-id current-user-id
+                        :target-user-id with-user-id})))
     (do
       (kick-to-root))))
 
 
 (defroutes message-routes
-  (POST "/message/to/:user" [user text] (create-message user text)))
+  (POST "/message/to/:user"   [user text] (create-message user text))
+  (GET  "/conversation/:user" [user] (show-conversation user)))
